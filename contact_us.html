@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6 text-center">Student Registration</h2>
+        <form id="registrationForm" class="space-y-4">
+            <div>
+                <label for="fullName" class="block mb-2">Full Name</label>
+                <input type="text" id="fullName" required 
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label for="nim" class="block mb-2">Student ID (NIM)</label>
+                <input type="text" id="nim" required 
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label for="email" class="block mb-2">Email Address</label>
+                <input type="email" id="email" required 
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label for="faculty" class="block mb-2">Faculty/Major</label>
+                <select id="faculty" required 
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Select Faculty</option>
+                    <option value="FTI">FTI</option>
+                    <option value="FMIPA">FMIPA</option>
+                    <option value="Filsafat">filsafat</option>
+                    <option value="keperawatan">keperawatan</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="dob" class="block mb-2">Date of Birth</label>
+                <input type="date" id="dob" required 
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label class="block mb-2">Gender</label>
+                <div class="flex space-x-4">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="gender" value="male" required 
+                            class="form-radio">
+                        <span class="ml-2">Male</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="gender" value="female" required 
+                            class="form-radio">
+                        <span class="ml-2">Female</span>
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <label for="address" class="block mb-2">Address</label>
+                <textarea id="address" required 
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            </div>
+
+            <div>
+                <label for="phone" class="block mb-2">Phone Number</label>
+                <input type="tel" id="phone" required 
+                    class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <button type="submit" 
+                class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition">
+                Register
+            </button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+  
+            const fullName = document.getElementById('fullName');
+            const nim = document.getElementById('nim');
+            const email = document.getElementById('email');
+            const phone = document.getElementById('phone');
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+           
+            const phoneRegex = /^\d{10,}$/;
+
+            let isValid = true;
+
+         
+            [fullName, nim, email, phone].forEach(el => {
+                el.classList.remove('border-red-500');
+            });
+
+            if (!emailRegex.test(email.value)) {
+                email.classList.add('border-red-500');
+                alert('Please enter a valid email address');
+                isValid = false;
+            }
+
+            if (!phoneRegex.test(phone.value)) {
+                phone.classList.add('border-red-500');
+                alert('Phone number must be numeric and at least 10 digits');
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert('Registration Successful!');
+                this.reset(); 
+            }
+        });
+    </script>
+</body>
+</html>
